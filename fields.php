@@ -8,7 +8,7 @@ class Fields {
      * Aparment number
      * @var integer
      */
-    protected $number;
+    protected $number = false;
 
     /**
      * Construction
@@ -89,7 +89,10 @@ class Fields {
 
         $apartment_number = $order->get_meta('apartment_number');
 
-        $address['apartment'] = $apartment_number;
+        if(!empty($apartment_number)) :
+            $this->number = $address['apartment'] = $apartment_number;
+        endif;
+
         return $address;
     }
 
@@ -101,9 +104,11 @@ class Fields {
      */
     public function set_address_format($formats)  {
 
-        foreach($formats as $key => &$format) :
-            $format .= "\n{apartment}";
-        endforeach;
+        if(false !== $this->number) :
+            foreach($formats as $key => &$format) :
+                $format .= "\n{apartment}";
+            endforeach;
+        endif;
 
         return $formats;
     }
