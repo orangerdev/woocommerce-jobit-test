@@ -66,7 +66,9 @@ class Fields {
     /**
      * Set apartment number to order meta
      * Hooked via action woocommerce_new_order, priority 999
-     * @param int $order_id
+     * @param int       $order_id
+     * @param array     $posted_data
+     * @param WC_Order  $order
      */
     public function set_apartment_number($order_id, $posted_data, $order) {
 ;
@@ -82,7 +84,8 @@ class Fields {
     /**
      * Display apartment number ini billing address
      * Hooked via filter woocommerce_order_formatted_billing_address, priority 999
-     * @param  array $address
+     * @param  array    $address
+     * @param  WC_Order $order
      * @return array
      */
     public function prepare_data(array $address, \WC_Order $order) {
